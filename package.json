@@ -5,7 +5,8 @@
   "workspaces": [
     "packages/*",
     "packages/legacy/core",
-    "packages/legacy/app"
+    "packages/legacy/app",
+    "samples/bifold"
   ],
   "repository": {
     "url": "https://github.com/hyperledger/aries-mobile-agent-react-native",
