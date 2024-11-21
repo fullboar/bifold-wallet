@@ -29,6 +29,7 @@ import { useAgent } from '@credo-ts/react-hooks'
 import { anoncreds } from '@hyperledger/anoncreds-react-native'
 import { ariesAskar } from '@hyperledger/aries-askar-react-native'
 import { indyVdr } from '@hyperledger/indy-vdr-react-native'
+import { DrpcModule } from '@credo-ts/drpc'
 
 interface GetAgentModulesOptions {
   indyNetworks: IndyVdrPoolConfig[]
@@ -105,6 +106,7 @@ export function getAgentModules({ indyNetworks, mediatorInvitationUrl, txnCache 
     pushNotificationsFcm: new PushNotificationsFcmModule(),
     pushNotificationsApns: new PushNotificationsApnsModule(),
     openId4VcHolder: new OpenId4VcHolderModule(),
+    drpc: new DrpcModule(),
   }
 }
 
