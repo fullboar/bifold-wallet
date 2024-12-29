@@ -172,7 +172,7 @@ const Home: React.FC<HomeProps> = () => {
       <View style={{ marginBottom: 100 }}>
         <Button
           title={'Verify by Video (DEMO)'}
-          onPress={() => navigation.getParent()?.navigate('Send Video', { screen: 'Instructions' })}
+          onPress={() => navigation.getParent()?.navigate('Send Video Stack', { screen: 'Instructions' })}
           buttonType={ButtonType.Primary}
         />
       </View>
