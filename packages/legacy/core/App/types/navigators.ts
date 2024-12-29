@@ -65,6 +65,7 @@ export enum Stacks {
   ConnectionStack = 'Connection Stack',
   HistoryStack = 'History Stack',
   CustomNavStack1 = 'Custom Nav Stack 1',
+  SendVideoStack = 'Send Video Stack',
 }
 
 export enum TabStacks {

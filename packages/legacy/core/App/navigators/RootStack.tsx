@@ -1,11 +1,7 @@
 import { ProofState } from '@credo-ts/core'
 import { useAgent, useProofByState } from '@credo-ts/react-hooks'
 import { ProofCustomMetadata, ProofMetadata } from '@hyperledger/aries-bifold-verifier'
-import {
-  CardStyleInterpolators,
-  StackCardStyleInterpolator,
-  createStackNavigator,
-} from '@react-navigation/stack'
+import { CardStyleInterpolators, StackCardStyleInterpolator, createStackNavigator } from '@react-navigation/stack'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DeviceEventEmitter } from 'react-native'
@@ -17,7 +13,8 @@ import { DispatchAction } from '../contexts/reducers/store'
 import { useStore } from '../contexts/store'
 import { useTheme } from '../contexts/theme'
 import { useDeepLinks } from '../hooks/deep-links'
-import HistoryStack from '../modules/history/navigation/HistoryStack'
+import HistoryStack from '../modules/history/navigators/HistoryStack'
+import SendVideoStack from '../modules/send-video/navigators/SendVideoStack'
 import Chat from '../screens/Chat'
 import { BifoldError } from '../types/error'
 import { Screens, Stacks, TabStacks } from '../types/navigators'
@@ -38,12 +35,7 @@ const RootStack: React.FC = () => {
   const { t } = useTranslation()
   const theme = useTheme()
   const defaultStackOptions = useDefaultStackOptions(theme)
-  const [
-    splash,
-    OnboardingStack,
-    CustomNavStack1,
-    loadState,
-  ] = useServices([
+  const [splash, OnboardingStack, CustomNavStack1, loadState] = useServices([
     TOKENS.SCREEN_SPLASH,
     TOKENS.STACK_ONBOARDING,
     TOKENS.CUSTOM_NAV_STACK_1,
@@ -132,6 +124,13 @@ const RootStack: React.FC = () => {
         <Stack.Screen
           name={Stacks.HistoryStack}
           component={HistoryStack}
+          options={{
+            cardStyleInterpolator: forFade,
+          }}
+        />
+        <Stack.Screen
+          name={Stacks.SendVideoStack}
+          component={SendVideoStack}
           options={{
             cardStyleInterpolator: forFade,
           }}
