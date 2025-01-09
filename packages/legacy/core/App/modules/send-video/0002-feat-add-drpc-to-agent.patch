@@ -18,7 +18,7 @@ index cf0f9ab1..f45b2b09 100644
      "@credo-ts/anoncreds": "0.5.11",
      "@credo-ts/askar": "0.5.11",
      "@credo-ts/core": "0.5.11",
-+    "@credo-ts/drpc": "^0.5.11",
++    "@credo-ts/drpc": "0.5.11",
      "@credo-ts/indy-sdk-to-askar-migration": "0.5.11",
      "@credo-ts/indy-vdr": "0.5.11",
      "@credo-ts/openid4vc": "0.5.11",
