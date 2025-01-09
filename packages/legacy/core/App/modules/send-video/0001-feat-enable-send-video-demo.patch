@@ -202,7 +202,7 @@ index ad946ed3..e90650e8 100644
 +      <View style={{ marginBottom: 100 }}>
 +        <Button
 +          title={'Verify by Video (DEMO)'}
-+          onPress={() => navigation.getParent()?.navigate('Send Video', { screen: 'Instructions' })}
++          onPress={() => navigation.getParent()?.navigate(Stacks.SendVideoStack, { screen: 'Instructions' })}
 +          buttonType={ButtonType.Primary}
 +        />
 +      </View>
