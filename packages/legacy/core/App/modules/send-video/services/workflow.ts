@@ -59,8 +59,6 @@ export class SentVideoServices implements SendVideoServicesI {
   private log?: BaseLogger
   private connectionSubscription?: Subscription
   private connection?: ConnectionRecord
-  private ready = false
-  private blarb = false
 
   // take in options, agent, and logger. Options should include the attestation service URL
   // and the proof to watch for along with the cred_ef_id of the attestation credentials.

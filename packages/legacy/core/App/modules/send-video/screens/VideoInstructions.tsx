@@ -33,10 +33,6 @@ const VideoInstructions: React.FC<VideoInstructionsProps> = () => {
   const [working, setWorking] = useState<boolean>(false)
 
   useEffect(() => {
-    // axios.post<Session>(`${Config.VIDEO_VERIFIER_HOST}/api/v1/session`).then((response) => {
-    //   setSession(response.data)
-    // })
-
     const startSession = async () => {
       if (!agent || working) {
         return
