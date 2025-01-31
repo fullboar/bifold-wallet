@@ -13,6 +13,7 @@ import { useStore } from '../contexts/store'
 import { useTheme } from '../contexts/theme'
 import { useDeepLinks } from '../hooks/deep-links'
 import HistoryStack from '../modules/history/navigators/HistoryStack'
+import SendVideoStack from '../modules/send-video/navigators/SendVideoStack'
 import Chat from '../screens/Chat'
 import { BifoldError } from '../types/error'
 import { Screens, Stacks, TabStacks } from '../types/navigators'
@@ -139,6 +140,13 @@ const RootStack: React.FC = () => {
         <Stack.Screen
           name={Stacks.HistoryStack}
           component={HistoryStack}
+          options={{
+            cardStyleInterpolator: forFade,
+          }}
+        />
+        <Stack.Screen
+          name={Stacks.SendVideoStack}
+          component={SendVideoStack}
           options={{
             cardStyleInterpolator: forFade,
           }}
