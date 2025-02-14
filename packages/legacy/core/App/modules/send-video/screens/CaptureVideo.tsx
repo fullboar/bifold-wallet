@@ -15,6 +15,7 @@ import Text from '../../../components/texts/Text'
 import Title from '../../../components/texts/Title'
 import { Screens, SendVideoStackParams } from '../types/navigators'
 import { testIdWithKey } from '../../../utils/testable'
+import {TOKENS, useServices} from '../../../container-api'
 
 const CaptureVideo: React.FC<StackScreenProps<SendVideoStackParams, Screens.CaptureVideo>> = ({ route }) => {
   const navigation = useNavigation()
@@ -25,6 +26,7 @@ const CaptureVideo: React.FC<StackScreenProps<SendVideoStackParams, Screens.Capt
   const [apiCall, setApiCall] = useState<boolean>(false)
   const [loader, setLoader] = useState<boolean>(false)
   const device = useCameraDevice('front')
+  const [logger] = useServices([TOKENS.UTIL_LOGGER])
   const screenAspectRatio = useWindowDimensions().scale
   const format = useCameraFormat(device, [
     { fps: 20 },
@@ -154,16 +156,6 @@ const CaptureVideo: React.FC<StackScreenProps<SendVideoStackParams, Screens.Capt
       })
       formData.append('sessionId', session.id)
       formData.append('idNumber', idNumber)
-      formData.append('front_image', {
-        uri: cardFrontImage,
-        type: 'image/png',
-        name: createImageName(),
-      })
-      formData.append('back_image', {
-        uri: cardBackImage,
-        type: 'image/png',
-        name: createImageName(),
-      })
 
       const response = await axios.post(`${Config.VIDEO_VERIFIER_HOST}/api/v1/submissions`, formData, {
         headers: {
@@ -185,7 +177,7 @@ const CaptureVideo: React.FC<StackScreenProps<SendVideoStackParams, Screens.Capt
           await submitVideo(video.path)
         },
         onRecordingError: (error) => {
-          console.error('Recording error:', error)
+          logger.error('Recording error:', error)
         },
       })
     }
