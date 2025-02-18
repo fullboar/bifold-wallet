@@ -153,23 +153,44 @@ const CaptureVideo: React.FC<StackScreenProps<SendVideoStackParams, Screens.Capt
         name: createFileName(),
       })
       formData.append('sessionId', session.id)
-      formData.append('idNumber', idNumber)
-      formData.append('front_image', {
-        uri: cardFrontImage,
-        type: 'image/png',
-        name: createImageName(),
-      })
-      formData.append('back_image', {
-        uri: cardBackImage,
-        type: 'image/png',
-        name: createImageName(),
-      })
+      formData.append('licenseNumber', idNumber)
 
       const response = await axios.post(`${Config.VIDEO_VERIFIER_HOST}/api/v1/submissions`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
+
+      const frontImageData = new FormData()
+      frontImageData.append('sessionId', session.id)
+      frontImageData.append('description', 'Front Image')
+      frontImageData.append('photo_file', {
+        uri: cardFrontImage,
+        type: 'image/png',
+        name: createImageName(),
+      })
+
+      const backImageData = new FormData()
+      backImageData.append('sessionId', session.id)
+      backImageData.append('description', 'Back Image')
+      backImageData.append('photo_file', {
+        uri: cardBackImage,
+        type: 'image/png',
+        name: createImageName(),
+      })
+
+      await Promise.all([
+        axios.post(`${Config.VIDEO_VERIFIER_HOST}/api/v1/submissions/photo`, frontImageData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
+        axios.post(`${Config.VIDEO_VERIFIER_HOST}/api/v1/submissions/photo`, backImageData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }),
+      ])
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error sending video to API:', error)
