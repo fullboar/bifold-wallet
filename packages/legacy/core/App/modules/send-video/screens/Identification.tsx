@@ -10,6 +10,7 @@ import Button, { ButtonType } from '../../../components/buttons/Button'
 import Title from '../../../components/texts/Title'
 import { Screens, SendVideoStackParams } from '../types/navigators'
 import { testIdWithKey } from '../../../utils/testable'
+import { useTheme } from '../../../contexts/theme'
 
 const Identification: React.FC<StackScreenProps<SendVideoStackParams, Screens.Identification>> = ({ route }) => {
   const navigation = useNavigation<StackNavigationProp<SendVideoStackParams, Screens.CaptureCard>>()
@@ -18,6 +19,7 @@ const Identification: React.FC<StackScreenProps<SendVideoStackParams, Screens.Id
   const [frontCardImage, setFrontCardImage] = useState<string | null>(null)
   const [backCardImage, setBackCardImage] = useState<string | null>(null)
   const session = route.params.session
+  const { TextTheme } = useTheme()
 
   const onPress = (type: string) => {
     navigation.navigate(Screens.CaptureCard, {
@@ -52,12 +54,13 @@ const Identification: React.FC<StackScreenProps<SendVideoStackParams, Screens.Id
       alignItems: 'center',
     },
     inputContainer: {
-      backgroundColor: '#1c1c1c',
+      ...TextTheme.normal,
+      backgroundColor: 'white',
       paddingHorizontal: 12,
       paddingVertical: 8,
       borderRadius: 8,
       marginVertical: 20,
-      color: '#fff',
+      color: 'black',
       borderColor: '#cecece',
       borderWidth: 1,
     },
@@ -122,18 +125,19 @@ const Identification: React.FC<StackScreenProps<SendVideoStackParams, Screens.Id
   return (
     <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.subContainer}>
-        <Title style={styles.titleHeading}>{t('SendVideo.Identification.EnterIdentificationNumber')}</Title>
+        <Title style={TextTheme.headingFour}>{t('SendVideo.Identification.EnterIdentificationNumber')}</Title>
         <TextInput
           style={styles.inputContainer}
           value={identificationNumber}
           placeholder="000000"
+          placeholderTextColor="lightGrey"
           onChangeText={setIdentificationNumber}
           keyboardType="numeric"
         />
         <View style={styles.divider} />
         <View style={styles.imageLabelContainer}>
-          <Title style={styles.sectionTitle}>{t('SendVideo.Identification.FrontOfCard')}</Title>
-          <Text style={styles.editIconText}>✎</Text>
+          <Title style={TextTheme.normal}>{t('SendVideo.Identification.FrontOfCard')}</Title>
+          <Text style={TextTheme.normal}>✎</Text>
         </View>
         <TouchableOpacity onPress={() => onPress('front')}>
           {frontCardImage ? (
@@ -145,8 +149,8 @@ const Identification: React.FC<StackScreenProps<SendVideoStackParams, Screens.Id
           )}
         </TouchableOpacity>
         <View style={styles.imageLabelContainer}>
-          <Title style={styles.sectionTitle}>{t('SendVideo.Identification.BackOfCard')}</Title>
-          <Text style={styles.editIconText}>✎</Text>
+          <Title style={TextTheme.normal}>{t('SendVideo.Identification.BackOfCard')}</Title>
+          <Text style={TextTheme.normal}>✎</Text>
         </View>
 
         <TouchableOpacity onPress={() => onPress('back')}>

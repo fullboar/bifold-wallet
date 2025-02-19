@@ -11,6 +11,7 @@ import Text from '../../../components/texts/Text'
 import Title from '../../../components/texts/Title'
 import { Screens, SendVideoStackParams } from '../types/navigators'
 import Toast from 'react-native-toast-message'
+import { useTheme } from '../../../contexts/theme'
 
 const CaptureCard: React.FC<StackScreenProps<SendVideoStackParams, Screens.CaptureCard>> = ({ route }) => {
   const navigation = useNavigation()
@@ -19,6 +20,7 @@ const CaptureCard: React.FC<StackScreenProps<SendVideoStackParams, Screens.Captu
   const device = useCameraDevice('back')
   const type = route?.params?.type
   const onImageCaptured = route?.params?.onImageCaptured
+  const { TextTheme } = useTheme()
 
   const capturePhoto = async () => {
     try {
@@ -123,7 +125,7 @@ const CaptureCard: React.FC<StackScreenProps<SendVideoStackParams, Screens.Captu
       </View>
       <View style={styles.subContainer}>
         <Text style={styles.step}> {type === 'front' ? 'Step 1' : 'Step 2'}</Text>
-        <Title style={styles.sectionTitle}>
+        <Title style={TextTheme.headingTwo}>
           {type === 'front' ? t('SendVideo.Identification.FrontOfCard') : t('SendVideo.Identification.BackOfCard')}
         </Title>
       </View>

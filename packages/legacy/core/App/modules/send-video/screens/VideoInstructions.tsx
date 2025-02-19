@@ -17,6 +17,7 @@ import { testIdWithKey } from '../../../utils/testable'
 import { Session } from '../types/api'
 import { SentVideoServices } from '../services/workflow'
 import { useAgent } from '@credo-ts/react-hooks'
+import { useTheme } from '../../../contexts/theme'
 
 type VideoInstructionsProps = StackScreenProps<SendVideoStackParams, Screens.VideoInstructions>
 
@@ -31,6 +32,7 @@ const VideoInstructions: React.FC<VideoInstructionsProps> = () => {
   const [session, setSession] = useState<Session | null>(null)
   const { agent } = useAgent()
   const [working, setWorking] = useState<boolean>(false)
+  const { ColorPallet, TextTheme, Assets } = useTheme()
 
   useEffect(() => {
     const startSession = async () => {
@@ -131,7 +133,7 @@ const VideoInstructions: React.FC<VideoInstructionsProps> = () => {
     },
 
     instructionsContainer: {
-      marginTop: '5%',
+      marginTop: 20,
     },
   })
 
@@ -140,18 +142,18 @@ const VideoInstructions: React.FC<VideoInstructionsProps> = () => {
   return (
     <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.subContainer}>
-        <Title style={styles.titleHeading}>{t('SendVideo.VideoInstructions.RecordAShortVideo')}</Title>
+        <Title style={TextTheme.headingTwo}>{t('SendVideo.VideoInstructions.RecordAShortVideo')}</Title>
 
         <View style={styles.topInfoContainer}>
-          <Title style={styles.topInfoHeading}>{t('SendVideo.VideoInstructions.YouWillBeAskedToDo')}</Title>
+          <Title style={TextTheme.normal}>{t('SendVideo.VideoInstructions.YouWillBeAskedToDo')}</Title>
           <Actions prompts={session.prompts} />
         </View>
 
         <View style={styles.instructionsContainer}>
-          <Title style={styles.instructionService}>{t('SendVideo.VideoInstructions.PersonAtServiceBC')}</Title>
-
-          <Title style={styles.instructionHeading}>{t('SendVideo.VideoInstructions.YouShould')}:</Title>
-
+          <Title style={[TextTheme.normal, { paddingBottom: 20 }]}>
+            {t('SendVideo.VideoInstructions.PersonAtServiceBC')}
+          </Title>
+          <Title style={TextTheme.headingThree}>{t('SendVideo.VideoInstructions.YouShould')}:</Title>
           <Instructions />
         </View>
 
@@ -162,6 +164,7 @@ const VideoInstructions: React.FC<VideoInstructionsProps> = () => {
             <Title style={styles.titleVideo}>{t('SendVideo.VideoInstructions.VideosWithInappropriateOffensive')}</Title>
           </View>
         </View>
+
         <Button
           title={t('SendVideo.VideoInstructions.Begin')}
           accessibilityLabel={t('SendVideo.VideoInstructions.Begin')}
